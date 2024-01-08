@@ -1,0 +1,105 @@
+[tool.isort]
+profile = "black"
+py_version = 39
+multi_line_output = 3  # How imports are formatted when they span multiple lines
+include_trailing_comma = true
+use_parentheses = true
+line_length = 88
+
+[tool.mypy]
+python_version = 3.9
+namespace_packages = true
+incremental = false
+warn_redundant_casts = true
+#warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true  # Flag unneeded type ignore statements
+allow_redefinition = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false  # Allow decorators that convert a typed function into an untyped one
+strict_optional = true
+strict_equality = true
+explicit_package_bases = true
+follow_imports = "skip"
+exclude = ["ProteinMPNN/", "openfold/", "build/"]
+
+
+[[tool.mypy.overrides]]
+module = [
+    "Bio.*",
+    "setuptools.*",
+    "pandas.*",
+    "omegaconf.*",
+    "hydra.*",
+    "absl.*",
+    "neptune.*",
+    "scipy.*",
+    "tree.*",
+    "biotite.*",
+    "GPUtil.*",
+    "esm.*",
+    "mdtraj.*",
+    "tmtools.*",
+    "matplotlib.*",
+    "sklearn.*",
+    "anarci.*",
+    "s3fs.*",
+    "seaborn.*"
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py39"  # Assume Python 3.9
+select = [  # Enable a wide range of existing codes.
+    "F", # Pyflakes
+    "E", "W", # pycodestyle
+    "UP", # pyupgrade
+    "N", # pep8-naming
+    "YTT", "ANN", "S", "BLE", "B", "A", "C4", "T10", "EM", "ISC", "ICN", "T20", "PT", "Q", "RET", "SIM", "TID", "ARG", "DTZ", "PIE", # flake8
+    "PGH", # pygrep-hooks
+    "RUF", # ruff
+    "PLC", "PLE", "PLR", "PLW", # pylint
+]
+ignore = [
+    "ANN002", # MissingTypeArgs
+    "ANN003", # MissingTypeKwargs
+    "ANN101", # MissingTypeSelf
+    "ANN102", # MissingTypeCls
+    "ANN401", # Avoid "Dynamically typed expressions (typing.Any) are disallowed"
+    "EM101", # Exception must not use a string literal, assign to variable first
+    "EM102", # Exception must not use an f-string literal, assign to variable first
+    "RET504", # Unnecessary variable assignment before `return` statement
+    "PLR0913", # Too many arguments to function call
+    "PLR0915", # Too many statements
+    "PLE0605", # Invalid format for `__all__`, must be `tuple` or `list`
+    "PLR0912", # Too many branches
+    "S113", # Avoid "Probable use of requests call without timeout"
+    "DTZ005", # Avoid requiring timezone to be specified in datetime.datetime.now()
+]
+
+[tool.ruff.per-file-ignores]
+"test_*.py" = [
+    "S101",  # Using `assert` is fine in test files
+    "PLR2004"  # Using constant without defining a variable is fine in test files
+]
+"framedipt/data/parsers.py" = [
+    "SIM115",  # Use context handler for opening files
+    "PLW2901",  # for loop variable overwritten by assignment target
+    "N806"  # Variable in function should be lowercase
+]
+"framedipt/data/transforms.py" = [
+    "N806",  # Variable in function should be lowercase
+    "N802",  # Function name should be lowercase
+    "N803",  # Argument name should be lowercase
+    "PLR2004",  # Magic value used in comparison
+    "S101",  # Use of `assert`
+]
+
+[tool.ruff.pydocstyle]
+convention = "google"  # Follow the Google Style Guide
+
+[tool.ruff.pylint]
+allow-magic-value-types = ["int", "str"]

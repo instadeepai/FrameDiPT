@@ -1,0 +1,72 @@
+# Default configuration to run evaluation.
+
+# Path of saved inference results.
+inference_path: ???
+# Path to save evaluation results.
+eval_output_path: ???
+# Whether to overwrite computed evaluation metrics.
+overwrite: False
+# Whether to use the best or median sample for evaluation.
+# Best (median) sample is the sample with smallest (median) backbone RMSD.
+# Only take effect when `sample_selection_strategy` is null.
+choice: median
+# Sample selection strategy, should be "mean", "median", "mode",
+# "mean_closest" or "median_closest".
+sample_selection_strategy: mode
+# Whether to perform alignment between predictions and ground truths.
+alignment: False
+# Whether to exclude diffusion regions during alignment.
+exclude_diffused_regions_in_alignment: True
+# Whether to align structures by separate chains.
+separate_alignment: True
+# Which CDR loop to evaluate in case of multiple diffused regions.
+# Should be 0, 1 or 2 as we only have 3 loops maximum.
+cdr_loop_index: 0
+# Whether to use swarmplot.
+swarmplot: True
+
+# use legacy result folder structure
+legacy: False
+
+# The following configs are only used for de novo protein design.
+denovo:
+  # Optional path of saved pre-trained model inference results.
+  pretrained_inference_path: null
+  # Choice for ESMFold sample, should be `best` or `median`.
+  esmfold_sample_choice: best
+  # TM-score threshold for clustering to evaluate diversity.
+  diversity_tm_score_th: 0.5
+  # Target database for searching for similar structures
+  # to evaluate novelty.
+  novelty_target_db: ???
+
+metrics:
+  model_metrics: # metrics defined per model
+    - bb_rmsd
+    - full_atom_rmsd # need to run cg2all to get full-atom model
+  chain_metrics: # metrics defined per chain
+    - bb_rmsd
+  residue_metrics: # Metrics defined per residue
+    - bb_rmsd
+    - gt_asa
+    - sample_asa
+    - asa_abs_error
+    - asa_square_error
+    - gt_rsa
+    - sample_rsa
+    - rsa_abs_error
+    - rsa_square_error
+  residue_group_metrics: # metrics with more than one result per residue
+    # For example, angle_error has phi, psi and omega angle metrics
+    - angle_error
+    - signed_angle_error
+    - sample
+    - gt
+
+reindex:
+  # Path to find exisiting PDB with non-contigious residue indices
+  in_path: ???
+  # Path to where to save updated PDBs
+  out_path: ???
+  # Use legacy directory format
+  legacy: False

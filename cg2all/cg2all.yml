@@ -1,0 +1,8 @@
+name: cg2all
+channels:
+  - defaults
+dependencies:
+  - python=3.9.16
+  - pip=22.3.1
+  - pip:
+      - git+http://github.com/huhlim/cg2all.git

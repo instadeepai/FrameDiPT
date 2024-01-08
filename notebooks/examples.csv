@@ -1,0 +1,7 @@
+pdb_id,tcr_alpha_chain,tcr_beta_chain,mhc_alpha_chain,mhc_beta_chain,peptide_chain
+1kgc,D,E,,,
+2ial,A,B,,,
+2bnu,A,B,,,
+2bnq,D,E,A,B,C
+1mi5,D,E,A,B,C
+2ian,D,E,A,B,C

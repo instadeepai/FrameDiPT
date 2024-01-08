@@ -1,0 +1,37 @@
+# Configuration for training data processing.
+
+# CSV file containing training PDB codes.
+csv_file: ???
+# Directory to save mmCIF files, files will be saved to `mmcif_dir/cifs/`.
+mmcif_dir: ???
+# Whether to download assembly 1.
+download_assembly: True
+# Max/min file size to filter files.
+max_file_size: null  # original value 3000000
+min_file_size: null  # original value 1000
+# Max resolution to filter the files.
+max_resolution: null  # original value 5
+# Whether to check valid resolution
+check_valid_resolution: False
+# Max number of chains
+max_num_chains: 26  # set to 26 corresponds to 26 letters for chain names
+# Max length of the sequence.
+max_len: null  # original value 512
+# Min length of the sequence.
+min_len: 5
+# Max length of a single chain.
+chain_max_len: null
+# Min length of a single chain.
+chain_min_len: 5
+# Number of processes to download mmCIFs.
+num_workers_download: 14
+# Number of processes to run data processing.
+num_processes: 100
+# Directory to write processed data.
+write_dir: ./database/processed_first_assembly
+# Whether to run debug mode, only 100 files will be processed.
+debug: False
+# Number of files to process in debug mode
+debug_num_files: 1000
+# Whether to log processing details.
+verbose: False

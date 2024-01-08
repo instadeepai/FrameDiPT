@@ -1,0 +1,18 @@
+pdb_id,tcr_alpha_chain,tcr_beta_chain,tcr_alpha_chain_subgroup,tcr_beta_chain_subgroup,tcr_alpha_chain_organism,tcr_beta_chain_organism,peptide_chain,mhc_type,mhc_alpha_chain,mhc_beta_chain,mhc_alpha_chain_organism,mhc_beta_chain_organism
+2bnu,A,B,TRAV21,TRBV6,homo sapiens,homo sapiens,,,,,,
+1tcr,A,B,TRAV9,TRBV13,mus musculus,mus musculus,,,,,,
+1kgc,D,E,TRAV26,TRBV7,homo sapiens,homo sapiens,,,,,,
+2nw2,A,B,TRAV1,TRBV10,homo sapiens,homo sapiens,,,,,,
+2vlm,D,E,TRAV27,TRBV19,homo sapiens,homo sapiens,,,,,,
+2ial,A,B,TRAV22,TRBV6,homo sapiens,homo sapiens,,,,,,
+2z35,A,B,TRAV6,TRBV13,mus musculus,mus musculus,,,,,,
+2bnq,D,E,TRAV21,TRBV6,homo sapiens,homo sapiens,C,MH1,A,B,homo sapiens,homo sapiens
+1g6r,A,B,TRAV9,TRBV13,mus musculus,mus musculus,P,MH1,H,L,mus musculus,mus musculus
+2ckb,A,B,TRAV9,TRBV13,mus musculus,mus musculus,P,MH1,H,L,mus musculus,mus musculus
+1mwa,A,B,TRAV9,TRBV13,mus musculus,mus musculus,P,MH1,H,L,mus musculus,mus musculus
+2oi9,B,C,TRAV9,TRBV13,mus musculus,mus musculus,Q,MH1,A,,mus musculus,
+1mi5,D,E,TRAV26,TRBV7,homo sapiens,homo sapiens,C,MH1,A,B,homo sapiens,homo sapiens
+2nx5,D,E,TRAV1,TRBV10,homo sapiens,homo sapiens,C,MH1,A,B,homo sapiens,homo sapiens
+1oga,D,E,TRAV27,TRBV19,homo sapiens,homo sapiens,C,MH1,A,B,homo sapiens,homo sapiens
+2ian,D,E,TRAV22,TRBV6,homo sapiens,homo sapiens,C,MH2,A,B,homo sapiens,homo sapiens
+2pxy,A,B,TRAV6,TRBV13,mus musculus,mus musculus,P,MH2,C,D,mus musculus,mus musculus

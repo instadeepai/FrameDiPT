@@ -1,0 +1,154 @@
+# Default or base configuration for SE(3) diffusion experiments.
+
+defaults:
+  - override hydra/launcher: joblib
+
+data:
+  on_aichor: False
+  # CSV for path and metadata to training examples.
+  csv_path: ???
+  cluster_file: ???
+  num_clusters: null
+  single_chain: False
+  filtering:
+    max_len: 512  # Maximum length of the multi-mer sequence.
+    min_len: 60
+    chain_max_len: 512  # Maximum length of the extracted single chain.
+    # Selects a subset of examples. Useful for debugging.
+    subset: null
+    allowed_oligomer: []
+    max_helix_percent: 1.0
+    max_loop_percent: 0.5
+    min_beta_percent: -1.0
+    rog_quantile: 0.96
+  min_t: 0.01
+  samples_per_eval_length: 4
+  num_eval_lengths: 10
+  num_t: 100
+  # Only used when experiment.inpainting is True.
+  redaction:
+    redact_min_len: 8
+    redact_max_len: 50
+
+diffuser:
+  diffuse_trans: True
+  diffuse_rot: True
+
+  # R(3) diffuser arguments
+  r3:
+    min_b: 0.1
+    max_b: 20.0
+    coordinate_scaling: 0.1
+    seed: null
+
+  # SO(3) diffuser arguments
+  so3:
+    num_omega: 1000
+    num_sigma: 1000
+    min_sigma: 0.1
+    max_sigma: 1.5
+    schedule: logarithmic
+    cache_dir: .cache/
+    use_cached_score: False
+    seed: null
+
+model:
+  # Only used when experiment.inpainting is True
+  input_aatype: False
+  node_embed_size: 256
+  edge_embed_size: 128
+  dropout: 0.0
+  embed:
+    index_embed_size: 32
+    aatype_embed_size: 64
+    embed_self_conditioning: True
+    num_bins: 22
+    min_bin: 1e-5
+    max_bin: 20.0
+  ipa:
+    c_s: ${model.node_embed_size}
+    c_z: ${model.edge_embed_size}
+    c_hidden: 256
+    c_skip: 64
+    no_heads: 8
+    no_qk_points: 8
+    no_v_points: 12
+    seq_tfmr_num_heads: 4
+    seq_tfmr_num_layers: 2
+    num_blocks: 4
+    coordinate_scaling: ${diffuser.r3.coordinate_scaling}
+
+experiment:
+  # Experiment metadata
+  name: baseline
+  # Whether to run experiment for inpainting
+  inpainting: False
+  run_id: null
+  neptune: False
+
+  # Training arguments
+  log_freq: 1000
+  batch_size: 128
+  eval_batch_size: ${data.samples_per_eval_length}
+  num_loader_workers: 2
+  num_epoch: 95
+  learning_rate: 0.0001
+  max_squared_res: 1000000  # This could be adapted according to GPU memory
+  prefetch_factor: 100
+  use_gpu: True
+  num_gpus: 1
+  recycle:
+    enabled: False
+    # "max" indicates recycling the fully noised structure at timestep T.
+    # "next" indicates recycling the structure at the subsequent timestep t + 1.
+    mode: "max" # max or next
+
+  # How many steps to checkpoint between.
+  ckpt_freq: 10000
+  # Take early checkpoint at step 100. Helpful for catching eval bugs early.
+  early_ckpt: True
+  early_ckpt_step: 100
+  # How many steps to perform evaluation.
+  eval_freq: 50000
+
+  # Checkpoint directory to warm start from.
+  resume_ckpt_dir: null
+  use_ckpt_conf: False
+  ckpt_dir: ./ckpt/
+
+  # Loss weights.
+  trans_loss_weight: 1.0
+  # Seprate rotation loss to include explicit penalties
+  # of errors in the axis and angle components of the loss.
+  separate_rot_loss: True
+  # In case of sperating the rotation loss,
+  # rot_loss_weight is applied only for angle loss.
+  rot_loss_weight: 0.5
+  # The rotation loss is considered when t > rot_loss_t_threshold.
+  # The rot_loss_t_threshold is only applied for the angle in the rotation seperation case.
+  rot_loss_t_threshold: 0.2
+  trans_x0_threshold: 1.0
+  coordinate_scaling: ${diffuser.r3.coordinate_scaling}
+  bb_atom_loss_weight: 1.0
+  bb_atom_loss_t_filter: 0.25
+  dist_mat_loss_weight: 1.0
+  dist_mat_loss_t_filter: 0.25
+  aux_loss_weight: 0.25
+
+  # Resampler.
+  use_importance_sampling: False
+  num_bins: 100
+  history_per_term: 10
+
+  # Evaluation.
+  eval_dir: ./eval_outputs
+  noise_scale: 1.0
+  # Filled in during training.
+  num_parameters: null
+
+hydra:
+  sweeper:
+    params:
+      # Example of hydra run using Neptune.
+      experiment.name: baseline
+      experiment.neptune: False

@@ -1,0 +1,90 @@
+default_stages: ["commit", "commit-msg", "push"]
+default_language_version:
+  python: python3
+
+exclude: ^openfold/|^ProteinMPNN/
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.269"
+    hooks:
+      - id: ruff
+        name: "Linting (ruff)"
+        args: [--fix, --exit-non-zero-on-fix]
+
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: "Import sorting (isort)"
+
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        name: "Code formatting (black)"
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: "Static type checking (mypy)"
+        entry: python -m mypy .
+        language: system
+        types: [python]
+        pass_filenames: false
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--maxkb=1400']
+        name: "Verify no large files have been added (pre-commit)"
+      - id: check-case-conflict
+        name: "Check for file collisions on case-insensitive filesystems (pre-commit)"
+      - id: check-merge-conflict
+        name: "Verify no merge conflict markers (pre-commit)"
+      - id: check-symlinks
+        name: "Verify no missing symlink targets (pre-commit)"
+      - id: check-toml
+        name: "Verify TOML syntax (pre-commit)"
+      - id: check-yaml
+        name: "Verify YAML syntax (pre-commit)"
+      - id: debug-statements
+        name: "Verify no debugger imports or breakpoint() calls (pre-commit)"
+      - id: destroyed-symlinks
+        name: "Check for symlinks that have been converted to regular files (pre-commit)"
+      - id: end-of-file-fixer
+        name: "Verify files end with a newline (pre-commit)"
+      - id: fix-byte-order-marker
+        name: "Remove UTF-8 byte order marker (pre-commit)"
+      - id: mixed-line-ending
+        name: "Fix potential line mismatches caused by Windows (pre-commit)"
+      - id: trailing-whitespace
+        name: "Trim trailing whitespace (pre-commit)"
+        args: [ --markdown-linebreak-ext=md ] # Trailing whitespaces are part of Markdown syntax
+      - id: requirements-txt-fixer
+        name: "Requirements txt sorting (pre-commit)"
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        name: "Check docstring formatting (pydocstyle)"
+        additional_dependencies:
+          - "tomli" # To avoid warning when pydocstyle reads from pyproject.toml
+        args:
+          - --convention=google
+          - --match='(.*(?<!_test)\.py)$' # Exclude test files
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.4.0
+    hooks:
+      - id: pyupgrade
+        name: "Check for Python 3.9 syntax upgrades (pyupgrade)"
+        args:
+          - --py39-plus
+
+  - repo: https://github.com/pre-commit/mirrors-pylint
+    rev: v3.0.0a5
+    hooks:
+      - id: pylint
+        name: "Static code analysis (pylint)"

@@ -1,0 +1,89 @@
+# Configuration for inference on SE(3) diffusion experiments.
+defaults:
+  - base
+
+inference:
+  name: tcr_cdr3_inpainting
+  # Whether to perform inpainting inference
+  inpainting: True
+  # Whether to input AA type
+  input_aatype: True
+  use_gpu: true # Whether to use GPU
+  seed: 123
+
+  # Directory of software, weights, and outputs.
+  pt_hub_dir: ./.cache/torch/
+  pmpnn_dir: ./ProteinMPNN/
+  output_dir: ./inference_outputs/
+
+  # Path to model weights.
+  weights_path: ./FrameDiPTModels/weights/inpainting.pth
+
+  # Whether to save diffusion trajectory.
+  save_backbone_trajectory: False
+  save_pred_x0_trajectory: False
+
+  # Whether to compute a confidence score. Should be "null" or "eigenfold".
+  confidence_score: null
+
+  diffusion:
+    # Number of steps.
+    num_t: 100
+    # Analogous to sampling temperature.
+    noise_scale: 0.1
+    # Final t.
+    min_t: 0.01
+
+  samples:
+    # Number of backbone samples per sequence length.
+    samples_per_length: 10
+    # Number of ESMFdold samples per backbone sample.
+    seq_per_sample: 8
+    # Minimum sequence length to sample.
+    min_length: 100
+    # Maximum sequence length to sample.
+    max_length: 500
+    # gap between lengths to sample. i.e. this script will sample all lengths
+    # in range(min_length, max_length, length_step)
+    length_step: 100
+
+  # Only used when inference.inpainting and base.experiment.inpainting are both True.
+  inpainting_samples:
+    # Whether to perform inpainting inference on TCR.
+    tcr: True
+    # Which CDR loops to diffuse, must give at least one loop id.
+    # Could be e.g. [CDR1], [CDR1, CDR2, CDR3].
+    cdr_loops: [CDR3]
+    # Whether to shift region around CDR3 loop, should be "null", "before" or "after".
+    shifted_region: null
+    # CSV data path containing TCR samples.
+    data_path: ./database/TCR.csv
+    # Directory to download TCR samples.
+    download_dir: ./database/TCR_first_assemblies
+    # Whether to download the first assembly or full structure.
+    first_assembly: True
+    # Whether to overwrite processed metadata.
+    overwrite: False
+    # Maximum resolution of the structure to apply for filtering inference samples.
+    max_resolution: null
+    # Maximum/Minimum length of AA sequence to apply for filtering inference samples.
+    max_len: null
+    min_len: null
+    # Maximum/Minimum length of single chain to apply for filtering inference samples.
+    chain_max_len: null
+    chain_min_len: null
+    # Maximum number of chains.
+    max_num_chains: null
+    # Whether to check if resolution is valid.
+    check_valid_resolution: False
+    # Minimum and maximum lengths of redaction region.
+    redaction:
+      redact_min_len: null
+      redact_max_len: null
+    # Number of backbone samples per test case.
+    samples: 5
+    # Whether to run ESMFold for inpainting samples.
+    run_esmfold: False
+    seed: ${inference.seed}
+    # How many workers to use when downloading mmCIF files
+    num_workers_download: 4
