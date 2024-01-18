@@ -1,10 +1,8 @@
 """Integration test for the inference scripts."""
-import datetime
 import pathlib
 import shutil
 
 import hydra
-import pytest
 
 from experiments import inference
 

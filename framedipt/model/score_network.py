@@ -241,7 +241,7 @@ class ScoreNetwork(nn.Module):
             input_aatype=self._model_conf.input_aatype,
         )
 
-        # Initial embeddings of positonal and relative indices.
+        # Initial embeddings of positional and relative indices.
         init_node_embed, init_edge_embed = self.embedding_layer(
             seq_idx=input_feats["seq_idx"],
             t=input_feats["t"],

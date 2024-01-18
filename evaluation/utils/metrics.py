@@ -1250,7 +1250,7 @@ def convert_to_eval_idx(vals: Sequence[T]) -> dict[int, T]:
 
     Returns:
         dict of the form {-4: vals[-4], ... , -1: vals[-1], 1: vals[0] 2: vals[1],...}.
-        dictionary keys do not "overlap". i.e. vals[-4] will only be accessable with
+        dictionary keys do not "overlap". i.e. vals[-4] will only be accessible with
         the -4 key and cannot be accessed using a positively valued key.
     """
     val_dict = {}

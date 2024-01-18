@@ -22,7 +22,7 @@ path_for_fixed_positions=$output_dir"/fixed_pdbs.jsonl"
 path_for_tied_positions=$output_dir"/tied_pdbs.jsonl"
 chains_to_design="A C"
 fixed_positions="9 10 11 12 13 14 15 16 17 18 19 20 21 22 23, 10 11 18 19 20 22"
-tied_positions="1 2 3 4 5 6 7 8, 1 2 3 4 5 6 7 8" #two list must match in length; residue 1 in chain A and C will be sampled togther;
+tied_positions="1 2 3 4 5 6 7 8, 1 2 3 4 5 6 7 8" #two list must match in length; residue 1 in chain A and C will be sampled together;
 
 python ../helper_scripts/parse_multiple_chains.py --input_path=$folder_with_pdbs --output_path=$path_for_parsed_chains
 

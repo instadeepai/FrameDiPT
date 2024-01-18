@@ -315,7 +315,7 @@ class R3Diffuser:
         x_reference_scaled = self._scale(x_reference)
         # We're going to handle the diffuse mask slightly differently here.
         # If our inpaint regions contain NaNs (because we don't know their values),
-        # we don't want them to propogate, and 0 * NaN = NaN, so we can't just
+        # we don't want them to propagate, and 0 * NaN = NaN, so we can't just
         # multiply by the mask.
         if diffuse_mask is not None:
             bool_mask = diffuse_mask.astype(bool)

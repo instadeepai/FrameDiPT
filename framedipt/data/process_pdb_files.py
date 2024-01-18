@@ -58,7 +58,7 @@ def process_file(file_path: pathlib.Path, write_dir: pathlib.Path) -> dict[str, 
 
     Raises:
         DataError if a known filtering rule is hit.
-        All other errors are unexpected and are propogated.
+        All other errors are unexpected and are propagated.
     """
     metadata: dict[str, Any] = {}
     pdb_name = file_path.stem
