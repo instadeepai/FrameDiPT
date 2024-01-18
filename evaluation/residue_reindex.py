@@ -15,7 +15,7 @@ from evaluation.utils.directory_parser import traverse_prediction_dir
 def get_residue_map(
     model: Model,
 ) -> dict[str, list[tuple[tuple[str, int, str], tuple[str, int, str]]]]:
-    """Calculate residue mapping such that the output residue indices are contigious.
+    """Calculate residue mapping such that the output residue indices are contiguous.
 
     Args:
         model: Biopython.PDB Model to calculate mapping for.
@@ -25,8 +25,8 @@ def get_residue_map(
             returned tuples are a pair of the form (old_index, new_index).
             old_index and new_index take the form of the full residue indexing scheme
             used by BioPython - (hetero flag, sequence identifier, insertion code)
-            new indicies are of the form (" ", idx, " ") where the idx values are
-            contigious and start from zero, i.e. 0,1,2,3,4,5,... for each chain.
+            new indices are of the form (" ", idx, " ") where the idx values are
+            contiguous and start from zero, i.e. 0,1,2,3,4,5,... for each chain.
 
     """
     res_map: dict[str, list[tuple[tuple[str, int, str], tuple[str, int, str]]]] = {}

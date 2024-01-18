@@ -88,3 +88,13 @@ repos:
     hooks:
       - id: pylint
         name: "Static code analysis (pylint)"
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+        name: codespell
+        description: Checks for common misspellings in text files.
+        entry: codespell --ignore-words=.codespell-ignore.txt
+        language: python
+        types: [text]

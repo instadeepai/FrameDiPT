@@ -608,7 +608,7 @@ def evaluation_plot(
         metric_names = metric_cfg[metric_type]
         for metric_name in metric_names:
             if metric_type == "residue_group_metrics":
-                # handle angles seperately.
+                # handle angles separately.
                 for angle in DIHEDRAL_ANGLES:
                     metric = f"{metric_name}_{angle}"
                     try:

@@ -118,14 +118,14 @@ experiment:
 
   # Loss weights.
   trans_loss_weight: 1.0
-  # Seprate rotation loss to include explicit penalties
+  # Separate rotation loss to include explicit penalties
   # of errors in the axis and angle components of the loss.
   separate_rot_loss: True
-  # In case of sperating the rotation loss,
+  # In case of separating the rotation loss,
   # rot_loss_weight is applied only for angle loss.
   rot_loss_weight: 0.5
   # The rotation loss is considered when t > rot_loss_t_threshold.
-  # The rot_loss_t_threshold is only applied for the angle in the rotation seperation case.
+  # The rot_loss_t_threshold is only applied for the angle in the rotation separation case.
   rot_loss_t_threshold: 0.2
   trans_x0_threshold: 1.0
   coordinate_scaling: ${diffuser.r3.coordinate_scaling}

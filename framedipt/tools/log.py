@@ -1,10 +1,6 @@
 """Module for providing a configured logger."""
 from __future__ import annotations
 
-import os
-
-import neptune
-import omegaconf
 from absl import logging
 
 

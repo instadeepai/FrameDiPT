@@ -237,7 +237,7 @@ def write_samples_pdbs(
         outdir: output directory to write files.
 
     Returns:
-        List of writen files.
+        List of written files.
     """
     all_list_paths = []
     for directory in data_path.glob("length_*"):

@@ -64,7 +64,7 @@ metrics:
     - gt
 
 reindex:
-  # Path to find exisiting PDB with non-contigious residue indices
+  # Path to find existing PDB with non-contiguous residue indices
   in_path: ???
   # Path to where to save updated PDBs
   out_path: ???

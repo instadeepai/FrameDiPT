@@ -7,7 +7,6 @@ Sample command:
 from __future__ import annotations
 
 import datetime
-import os
 import pathlib
 import shutil
 import subprocess
