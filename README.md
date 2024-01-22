@@ -1,4 +1,5 @@
-# FrameDiPT
+# FrameDiPT: SE(3) Diffusion Model for Protein Structure Inpainting
+
 [![Python Version](https://img.shields.io/badge/python-3.9-blue.svg)](https://docs.python.org/3.9/library/index.html)
 [![license](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](./LICENSE.md)
 
